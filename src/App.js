@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { login } from './utils'
 
-function App() {
+export const App = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    setIsLoading(true)
+
+    try {
+      await login({ username, password })
+      setIsLoggedIn(true)
+      setPassword('')
+      setError('')
+    } catch (error) {
+      setError('Incorrect username or password')
+    }
+
+    setIsLoading(false)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="login-container">
+        {isLoggedIn ? 
+        <>
+          <h1>Hello {username}!</h1>
+          <button className="logout-btn" onClick={() => setIsLoggedIn(false)}>Log Out</button>
+        </> :
+        <form className="form" onSubmit={onSubmit}>
+          {error && <p className="error">{error}</p>}
+          <p>Please Login</p>
+          <input 
+            type="text" 
+            placeholder="username"
+            value={username}
+            onChange={e => setUsername(e.currentTarget.value)}
+            />
+          <input 
+            type="password" 
+            placeholder="password" 
+            autoComplete="new-password"
+            value={password}
+            onChange={e => setPassword(e.currentTarget.value)}
+            />
+          <button className="submit" type="submit" disabled={isLoading}>
+            {isLoading? 'Loggin in...'  : 'Log In'}
+          </button>
+        </form>}
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
