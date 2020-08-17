@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { LoginPage } from './LoginPage';
+import { CartPage } from './CartPage';
 
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
@@ -13,8 +14,8 @@ export const App = () => {
           <Route path='/login'>
             <LoginPage />
           </Route>
-          <Route path='/'>
-            <LoginPage />
+          <Route path='/cart'>
+            <CartPage />
           </Route>
         </Switch>
       </Router>

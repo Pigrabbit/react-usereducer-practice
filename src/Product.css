@@ -1,0 +1,14 @@
+.product {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+}
+
+.product-counter {
+    display: flex;
+    margin: 0 3rem;
+}
+
+button {
+    margin: 0 1rem;
+}

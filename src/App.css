@@ -23,7 +23,7 @@ input {
   margin: 10px 0;
 }
 
-button {
+button.submit {
   margin: 1rem 0;
   background-color: transparent;
   height: 2rem;
